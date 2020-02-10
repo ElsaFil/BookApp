@@ -1,12 +1,32 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
 
 a {
-  color: #00b7ff; }
+  color: #00b7ff;
+}
 
 nav {
   display: flex;
-  justify-content: space-between; }
+  justify-content: space-between;
+}
+.booksContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.booksContainer a {
+  width: 30%;
+  border: 1px solid gray;
+  border-radius: 20px;
+  text-decoration: none;
+  margin-bottom: 20px;
+}
+
+.bookCard {
+  text-align: center;
+}
 
 /*# sourceMappingURL=style.css.map */
