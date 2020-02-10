@@ -1,25 +1,40 @@
-<div class="bookDetails">
-  <h1>{{volumeInfo.title}}</h1>
-  <h4>{{volumeInfo.subtitle}}</h4>
-  {{#if volumeInfo.imageLinks.thumbnail}}
-  <img src="{{volumeInfo.imageLinks.thumbnail}}" alt="book cover">
-  {{else}}
-  <img src="/images/placeholder-image.png" alt="book cover">
-  {{/if}}
-  <h5>Authors:</h5>
-  {{#each volumeInfo.authors}}
-  <h3>{{this}}</h3>
-  {{/each}}
-  <p>Language: {{volumeInfo.language}}</p>
-  <p>Categories:</p>
-  {{#each volumeInfo.categories}}
-  <p>{{this}}</p>
-  {{/each}}
-  <h5>Summary</h5>
-  {{{volumeInfo.description}}}
-  <br>
-  {{#each volumeInfo.industryIdentifiers}}
-  <p>{{this.type}}: {{this.identifier}}</p>
-  {{/each}}
+<div class="container bookDetailedView">
+  <div class="bookDetails">
+    <h1>{{volumeInfo.title}}</h1>
+    <h4>{{volumeInfo.subtitle}}</h4>
+    {{#if volumeInfo.imageLinks.thumbnail}}
+    <img src="{{volumeInfo.imageLinks.thumbnail}}" alt="book cover">
+    {{else}}
+    <img class="book-cover-placeholder" src="/images/placeholder-image.png" alt="missing book cover">
+    {{/if}}
+    <p>
+      <span class="info-key">Authors: </span>
+      {{#each volumeInfo.authors}}
+      <span class="info-value">{{this}}</span>
+      {{/each}}
+    </p>
+    <p>
+      <span class="info-key">Language: </span><span class="info-value">{{volumeInfo.language}}</span>
+    </p>
+    <p>
+      <span class="info-key">Categories:</span>
+      {{#each volumeInfo.categories}}
+      <span class="info-value">{{this}}</span>
+      {{/each}}
+    </p>
+    <span class="info-key">Summary</span>
+    <div>{{{volumeInfo.description}}}</div>
+    <p>
+      {{#each volumeInfo.industryIdentifiers}}
+      <span class="info-key">{{this.type}}: </span> <span class="info-value">{{this.identifier}}</span>
+      <br>
+      {{/each}}
+    </p>
 
+    <button class="add-to-your-books-btn">Add to your books</button>
+  </div>
+  <div class="bookLocations">
+    <div id="map"></div>
+    <script src="/javascripts/map.js"></script>
+  </div>
 </div>

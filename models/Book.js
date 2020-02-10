@@ -29,7 +29,13 @@ const bookSchema = new mongoose.Schema({
   infoLinkURL: String,
   googleId: {
     type: String
-  }
+  },
+  owners: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User"
+    }
+  ]
 });
 
 const Book = mongoose.model("Book", bookSchema);
