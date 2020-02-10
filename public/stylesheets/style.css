@@ -2,8 +2,11 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
-a {
-  color: #00b7ff; }
+
+#map {
+  height: 500px;
+  margin-top: 50px;
+  width: 100%; }
 
 nav {
   position: fixed;
@@ -11,6 +14,7 @@ nav {
   top: 0px;
   left: 0px;
   display: flex;
+<<<<<<< HEAD
   justify-content: space-between;
   align-items: center;
   background-color: #595959; }
@@ -45,12 +49,19 @@ nav a {
   color: #ff847b;
   border: 1px solid #ff847b;
   border-radius: 10px; }
+=======
+  justify-content: space-between; }
+>>>>>>> 044b2ebd83ff4d9d5552dc34d5eaa1ee4623a586
 
 .booksContainer {
   display: flex;
   flex-wrap: wrap;
+<<<<<<< HEAD
   justify-content: space-evenly;
   padding-top: 80px; }
+=======
+  justify-content: space-evenly; }
+>>>>>>> 044b2ebd83ff4d9d5552dc34d5eaa1ee4623a586
 
 .booksContainer a {
   width: 30%;
@@ -61,6 +72,7 @@ nav a {
 
 .bookCard {
   text-align: center; }
+<<<<<<< HEAD
 
 .bookDetails {
   padding-top: 50px; }
@@ -95,5 +107,7 @@ nav a {
   border: 1px solid #ff847b;
   border-radius: 10px;
   margin: 10px; }
+=======
+>>>>>>> 044b2ebd83ff4d9d5552dc34d5eaa1ee4623a586
 
 /*# sourceMappingURL=style.css.map */
