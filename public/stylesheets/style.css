@@ -7,6 +7,10 @@ body {
   margin-top: 50px;
   width: 100%; }
 
+nav {
+  display: flex;
+  justify-content: space-between; }
+
 .booksContainer {
   display: flex;
   flex-wrap: wrap;
