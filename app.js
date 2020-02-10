@@ -9,8 +9,6 @@ const mongoose = require("mongoose");
 const logger = require("morgan");
 const path = require("path");
 
-const googleKey = process.env.API_KEY;
-
 mongoose
   .connect("mongodb://localhost/bookapp", { useNewUrlParser: true })
   .then(x => {
