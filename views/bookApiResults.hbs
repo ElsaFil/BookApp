@@ -1,12 +1,14 @@
 <h1>Results:</h1>
-{{#each results}}
-<div class="bookCard">
-  <h2>{{volumeInfo.title}}</h1>
-    <img src="{{volumeInfo.imageLinks.thumbnail}}" alt="book cover">
-    {{#each volumeInfo.authors}}
-    <h3>{{this}}</h3>
-    {{/each}}
-    <p>{{volumeInfo.language}}</p>
+<div class="booksContainer">
+  {{#each results}}
+  <a href="/bookDetails/{{id}}">
+    <div class="bookCard">
+      <h2>{{volumeInfo.title}}</h1>
+        <img src="{{volumeInfo.imageLinks.thumbnail}}" alt="book cover">
+        {{#each volumeInfo.authors}}
+        <h3>{{this}}</h3>
+        {{/each}}
+    </div>
+  </a>
+  {{/each}}
 </div>
-
-{{/each}}

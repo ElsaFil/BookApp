@@ -3,6 +3,18 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+.booksContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.booksContainer a {
+  width: 30%;
+  border: 1px solid gray;
+  border-radius: 20px;
+  text-decoration: none;
+  margin-bottom: 20px;
+}
+.bookCard {
+  text-align: center;
 }

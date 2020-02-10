@@ -1,0 +1,25 @@
+<div class="bookDetails">
+  <h1>{{volumeInfo.title}}</h1>
+  <h4>{{volumeInfo.subtitle}}</h4>
+  {{#if volumeInfo.imageLinks.thumbnail}}
+  <img src="{{volumeInfo.imageLinks.thumbnail}}" alt="book cover">
+  {{else}}
+  <img src="/images/placeholder-image.png" alt="book cover">
+  {{/if}}
+  <h5>Authors:</h5>
+  {{#each volumeInfo.authors}}
+  <h3>{{this}}</h3>
+  {{/each}}
+  <p>Language: {{volumeInfo.language}}</p>
+  <p>Categories:</p>
+  {{#each volumeInfo.categories}}
+  <p>{{this}}</p>
+  {{/each}}
+  <h5>Summary</h5>
+  {{{volumeInfo.description}}}
+  <br>
+  {{#each volumeInfo.industryIdentifiers}}
+  <p>{{this.type}}: {{this.identifier}}</p>
+  {{/each}}
+
+</div>
