@@ -7,7 +7,10 @@ const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
 router.get("/login", (req, res, next) => {
-  res.render("auth/login", { message: req.flash("error") });
+  res.render("auth/login", {
+    message: req.flash("error"),
+    user: req.user
+  });
 });
 
 router.post(
@@ -21,7 +24,9 @@ router.post(
 );
 
 router.get("/signup", (req, res, next) => {
-  res.render("auth/signup");
+  res.render("auth/signup", {
+    user: req.user
+  });
 });
 
 router.post("/signup", (req, res, next) => {
@@ -53,10 +58,14 @@ router.post("/signup", (req, res, next) => {
         });
       })
       .catch(err => {
-        console.log(err);
-        //res.render("auth/signup", { message: "Something went wrong" });
+        res.render("auth/signup", { message: "Something went wrong" });
       });
   });
+});
+
+router.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
 });
 
 module.exports = router;

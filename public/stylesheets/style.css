@@ -1,32 +1,99 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 a {
-  color: #00b7ff;
-}
+  color: #00b7ff; }
 
 nav {
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  left: 0px;
   display: flex;
   justify-content: space-between;
-}
+  align-items: center;
+  background-color: #595959; }
+
+nav a {
+  color: #ff847b;
+  padding-right: 20px;
+  font-size: 1.2em; }
+
+#nav-logo {
+  height: 10vh;
+  padding: 5px 20px; }
+
+#logo {
+  height: 70vh; }
+
+.formContainer {
+  padding-top: 50px;
+  text-align: center; }
+
+.formContainer input {
+  width: 30vw;
+  font-size: 1.2em;
+  padding: 10px;
+  border: 0.5px solid #595959;
+  border-radius: 10px; }
+
+.formContainer button {
+  font-size: 1.2em;
+  padding: 10px;
+  background-color: white;
+  color: #ff847b;
+  border: 1px solid #ff847b;
+  border-radius: 10px; }
+
 .booksContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-}
+  padding-top: 80px; }
 
 .booksContainer a {
   width: 30%;
-  border: 1px solid gray;
+  border: 1px solid #595959;
   border-radius: 20px;
   text-decoration: none;
-  margin-bottom: 20px;
-}
+  margin-bottom: 20px; }
 
 .bookCard {
-  text-align: center;
-}
+  text-align: center; }
+
+.bookDetails {
+  padding-top: 50px; }
+
+.authContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ff847b;
+  width: 40vw;
+  padding: 50px 0px;
+  margin: 0 auto;
+  margin-top: 100px;
+  border-radius: 10px; }
+
+.authContainer label {
+  font-size: 1.5em;
+  padding: 10px; }
+
+.authContainer input {
+  width: 30vw;
+  font-size: 1.2em;
+  padding: 10px;
+  border: 0.5px solid #595959;
+  border-radius: 10px; }
+
+.authContainer button {
+  font-size: 1.2em;
+  padding: 10px;
+  background-color: white;
+  color: #ff847b;
+  border: 1px solid #ff847b;
+  border-radius: 10px;
+  margin: 10px; }
 
 /*# sourceMappingURL=style.css.map */

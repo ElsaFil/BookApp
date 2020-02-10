@@ -10,7 +10,17 @@
 </head>
 
 <body>
-
+  <nav>
+    <a href="/"><img id="nav-logo" src="/images/logo_small.png" alt="logo"></a>
+    <div>
+      {{#if user}}
+      <a href="/auth/logout">Logout</a>
+      {{else}}
+      <a href="/auth/signup">Sign Up</a>
+      <a href="/auth/login">Login</a>
+      {{/if}}
+    </div>
+  </nav>
   {{{body}}}
 
   <script src="/javascripts/script.js"></script>
