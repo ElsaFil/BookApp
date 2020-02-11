@@ -2,9 +2,14 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
+<<<<<<< HEAD
 #map {
+=======
+.formContainer #map,
+.bookLocations #map {
+>>>>>>> f48efdb9253158d7fd872b29f50e19ebfb264a38
   height: 500px;
-  margin-top: 50px;
+  margin: 50px auto;
   width: 100%; }
 
 nav {
@@ -15,7 +20,8 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #595959; }
+  background-color: #595959;
+  z-index: 100; }
 
 nav a {
   color: #ff847b;
@@ -28,6 +34,9 @@ nav a {
 
 #logo {
   height: 70vh; }
+
+.container {
+  margin-top: 10vh; }
 
 .formContainer {
   padding-top: 50px;
@@ -51,8 +60,12 @@ nav a {
 .booksContainer {
   display: flex;
   flex-wrap: wrap;
+<<<<<<< HEAD
   justify-content: space-evenly;
   padding-top: 80px; }
+=======
+  justify-content: space-evenly; }
+>>>>>>> f48efdb9253158d7fd872b29f50e19ebfb264a38
 
 .booksContainer a {
   width: 30%;
@@ -64,8 +77,9 @@ nav a {
 .bookCard {
   text-align: center; }
 
-.bookDetails {
-  padding-top: 50px; }
+.book-cover-placeholder {
+  width: 92px;
+  margin: 20px auto; }
 
 .authContainer {
   display: flex;
@@ -97,5 +111,26 @@ nav a {
   border: 1px solid #ff847b;
   border-radius: 10px;
   margin: 10px; }
+<<<<<<< HEAD
+=======
+
+.bookDetailedView {
+  display: flex;
+  justify-content: space-evenly; }
+
+.bookDetails,
+.bookLocations {
+  width: 40%; }
+
+.bookDetails .info-key {
+  font-weight: bold; }
+
+.add-to-your-books-btn {
+  height: 30px;
+  border-radius: 4px;
+  font-size: 11pt;
+  border: 1px solid #595959;
+  background-color: #ff847b; }
+>>>>>>> f48efdb9253158d7fd872b29f50e19ebfb264a38
 
 /*# sourceMappingURL=style.css.map */

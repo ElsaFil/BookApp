@@ -1,9 +1,16 @@
+<div class="container">
+  <h1>Results:</h1>
+</div>
 <div class="booksContainer">
   {{#each results}}
   <a href="/bookDetails/{{id}}">
     <div class="bookCard">
       <h2>{{volumeInfo.title}}</h1>
+        {{#if volumeInfo.imageLinks.thumbnail}}
         <img src="{{volumeInfo.imageLinks.thumbnail}}" alt="book cover">
+        {{else}}
+        <img class="book-cover-placeholder" src="/images/placeholder-image.png" alt="missing book cover">
+        {{/if}}
         {{#each volumeInfo.authors}}
         <h3>{{this}}</h3>
         {{/each}}
