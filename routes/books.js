@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
+const Book = require("../models/Book");
 const googleKey = process.env.API_KEY;
 
 router.get("/booksApiCall", (req, res, next) => {
@@ -32,6 +33,17 @@ router.get("/bookDetails/:bookGoogleId", (req, res, next) => {
     .catch(err => {
       console.log(err);
     });
+});
+
+router.get("/bookDetails/:bookGoogleId/owners", (req, res, next) => {
+  let bookGoogleId = req.params.bookGoogleId;
+  Book.findOne({ bookGoogleId }, "googleId", (err, book) => {
+    if (book == null) {
+      console.log(`could not find book with id: ${bookGoogleId} ❌`);
+      return next(err);
+    }
+    response.json = book.owners;
+  });
 });
 
 module.exports = router;
