@@ -7,10 +7,7 @@ const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
 router.get("/login", (req, res, next) => {
-  res.render("auth/login", {
-    message: req.flash("error"),
-    user: req.user
-  });
+  res.render("auth/login", { message: req.flash("error") });
 });
 
 router.post(
@@ -24,16 +21,21 @@ router.post(
 );
 
 router.get("/signup", (req, res, next) => {
-  res.render("auth/signup", {
-    user: req.user
-  });
+  res.render("auth/signup");
 });
 
 router.post("/signup", (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
+  const street = req.body.street;
+  const number = req.body.number;
+  const zip = req.body.zip;
   if (username === "" || password === "") {
     res.render("auth/signup", { message: "Enter username and password" });
+    return;
+  }
+  if (street === "" || number === "" || zip == "") {
+    res.render("auth/signup", { message: "Enter address info" });
     return;
   }
   User.findOne({ username }, "username", (err, user) => {
@@ -46,7 +48,12 @@ router.post("/signup", (req, res, next) => {
 
     const newUser = new User({
       username: username,
-      password: hashPass
+      password: hashPass,
+      address: {
+        street,
+        number,
+        PLZ: zip
+      }
     });
 
     newUser

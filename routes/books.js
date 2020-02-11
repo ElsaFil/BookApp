@@ -6,16 +6,12 @@ const googleKey = process.env.API_KEY;
 const User = require("../models/User");
 
 router.get("/booksApiCall", (req, res, next) => {
-  console.log(req.query);
   axios
     .get(
       `https://www.googleapis.com/books/v1/volumes?q=${req.query.bookSearch}&key=${googleKey}`
     )
     .then(response => {
-      res.render("bookApiResults", {
-        results: response.data.items,
-        user: req.user
-      });
+      res.render("bookApiResults", { results: response.data.items });
     })
     .catch(err => {
       console.log(err);
@@ -28,8 +24,18 @@ router.get("/bookDetails/:bookGoogleId", (req, res, next) => {
       `https://www.googleapis.com/books/v1/volumes/${req.params.bookGoogleId}?key=${googleKey}`
     )
     .then(response => {
-      //return res.send(response.data);
-      res.render("bookDetails", { result: response.data, user: req.user });
+      Book.findOne({ googleId: response.data.id })
+        .populate("owners")
+        .then(foundBook => {
+          if (foundBook) {
+            res.render("bookDetails", {
+              result: response.data,
+              owners: foundBook.owners
+            });
+          } else {
+            res.render("bookDetails", { result: response.data });
+          }
+        });
     })
     .catch(err => {
       console.log(err);
@@ -104,14 +110,18 @@ router.post("/bookDetails/:bookGoogleId", (req, res, next) => {
 });
 
 router.get("/bookDetails/:bookGoogleId/owners", (req, res, next) => {
+  console.log(`trying to get owners 🌸`);
   let bookGoogleId = req.params.bookGoogleId;
-  Book.findOne({ bookGoogleId }, "googleId", (err, book) => {
-    if (book == null) {
-      console.log(`could not find book with id: ${bookGoogleId} ❌`);
-      return next(err);
-    }
-    response.json = book.owners;
-  });
+  Book.findOne({ googleId: bookGoogleId })
+    .populate("owners")
+    .then(foundBook => {
+      if (!foundBook) {
+        console.log(`could not find book with id: ${bookGoogleId} ❌`);
+        return next(err);
+      }
+      console.log(`found book 🎉`);
+      response.json = book.owners;
+    });
 });
 
 module.exports = router;

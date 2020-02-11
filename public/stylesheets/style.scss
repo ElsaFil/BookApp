@@ -2,6 +2,9 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+.hidden {
+  display: none;
+}
 
 .formContainer #map,
 .bookLocations #map {
@@ -36,6 +39,11 @@ nav a {
 .container {
   margin-top: 10vh;
 }
+.error-message {
+  color: tomato;
+  margin: 30px;
+  font-weight: bold;
+}
 .formContainer {
   padding-top: 50px;
   text-align: center;
@@ -55,6 +63,30 @@ nav a {
   border: 1px solid #ff847b;
   border-radius: 10px;
 }
+#address-inputs {
+  width: 80%;
+  padding: 50px 0;
+  text-align: center;
+}
+#address-inputs p {
+  width: 100%;
+  text-align: center;
+  font-size: 1.2em;
+}
+#address-inputs input {
+  padding: 5px;
+  margin: 5px 0;
+  font-size: 1em;
+  border: 1px solid #c5c5c5;
+  border-radius: 5px;
+}
+#address-inputs #number {
+  width: 4vw;
+}
+#address-inputs #zip {
+  width: 8vw;
+}
+
 .booksContainer {
   display: flex;
   flex-wrap: wrap;

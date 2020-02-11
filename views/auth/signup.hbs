@@ -3,6 +3,14 @@
   <input type="text" name="username" id="username" placeholder="Username">
   <label for="password">Password: </label>
   <input type="password" name="password" id="password" placeholder="Password">
+
+  <div id="address-inputs">
+    <p>Address:</p>
+    <input type="text" name="street" id="street" placeholder="Street"><br>
+    <input type="text" name="number" id="number" placeholder="Number">
+    <input type="text" name="zip" id="zip" placeholder="ZIP">
+  </div>
+
   {{#if message }}
   <div class="error-message">{{ message }}</div>
   {{/if}}
