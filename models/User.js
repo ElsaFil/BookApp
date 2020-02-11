@@ -4,13 +4,6 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   username: String,
   password: String,
-  email: {
-    type: String,
-    lowercase: true,
-    unique: true,
-    match: [/\S+@\S+\.\S+/, "is invalid"],
-    index: true
-  },
   address: {
     street: String,
     number: String,
@@ -21,6 +14,12 @@ const userSchema = new Schema({
     enum: ["basic", "admin"],
     default: "basic"
   },
+  books: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Book"
+    }
+  ],
   reviews: [
     {
       type: Schema.Types.ObjectId,

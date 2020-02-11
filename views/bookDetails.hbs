@@ -1,37 +1,39 @@
 <div class="container bookDetailedView">
   <div class="bookDetails">
-    <h1>{{volumeInfo.title}}</h1>
-    <h4>{{volumeInfo.subtitle}}</h4>
-    {{#if volumeInfo.imageLinks.thumbnail}}
-    <img src="{{volumeInfo.imageLinks.thumbnail}}" alt="book cover">
+    <h1>{{result.volumeInfo.title}}</h1>
+    <h4>{{result.volumeInfo.subtitle}}</h4>
+    {{#if result.volumeInfo.imageLinks.thumbnail}}
+    <img src="{{result.volumeInfo.imageLinks.thumbnail}}" alt="book cover">
     {{else}}
     <img class="book-cover-placeholder" src="/images/placeholder-image.png" alt="missing book cover">
     {{/if}}
     <p>
       <span class="info-key">Authors: </span>
-      {{#each volumeInfo.authors}}
+      {{#each result.volumeInfo.authors}}
       <span class="info-value">{{this}}</span>
       {{/each}}
     </p>
     <p>
-      <span class="info-key">Language: </span><span class="info-value">{{volumeInfo.language}}</span>
+      <span class="info-key">Language: </span><span class="info-value">{{result.volumeInfo.language}}</span>
     </p>
     <p>
       <span class="info-key">Categories:</span>
-      {{#each volumeInfo.categories}}
+      {{#each result.volumeInfo.categories}}
       <span class="info-value">{{this}}</span>
       {{/each}}
     </p>
     <span class="info-key">Summary</span>
-    <div>{{{volumeInfo.description}}}</div>
+    <div>{{{result.volumeInfo.description}}}</div>
     <p>
-      {{#each volumeInfo.industryIdentifiers}}
+      {{#each result.volumeInfo.industryIdentifiers}}
       <span class="info-key">{{this.type}}: </span> <span class="info-value">{{this.identifier}}</span>
       <br>
       {{/each}}
     </p>
+    <form action="/bookDetails/{{result.id}}" method="POST">
+      <button type="submit" class="add-to-your-books-btn">Add to your books</button>
+    </form>
 
-    <button class="add-to-your-books-btn">Add to your books</button>
   </div>
   <div class="bookLocations">
     <div id="map"></div>

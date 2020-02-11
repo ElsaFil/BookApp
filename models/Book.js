@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const bookSchema = new mongoose.Schema({
+const bookSchema = new Schema({
   title: {
     required: true,
     type: String
@@ -14,12 +15,10 @@ const bookSchema = new mongoose.Schema({
   },
   description: String,
   ISBN_10: {
-    type: String,
-    required: true
+    type: String
   },
   ISBN_13: {
-    type: String,
-    required: true
+    type: String
   },
   pageCount: Number,
   categories: Array,
