@@ -10,15 +10,11 @@ router.get("/booksApiCall", (req, res, next) => {
       `https://www.googleapis.com/books/v1/volumes?q=${req.query.bookSearch}&key=${googleKey}`
     )
     .then(response => {
-<<<<<<< HEAD
       // res.json(response.data.items[0].volumeInfo.title);
       res.render("bookApiResults", {
         results: response.data.items,
         user: req.user
       });
-=======
-      res.render("bookApiResults", { results: response.data.items });
->>>>>>> f48efdb9253158d7fd872b29f50e19ebfb264a38
     })
     .catch(err => {
       console.log(err);
