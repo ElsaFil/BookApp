@@ -11,7 +11,10 @@ router.get("/booksApiCall", (req, res, next) => {
     )
     .then(response => {
       // res.json(response.data.items[0].volumeInfo.title);
-      res.render("bookApiResults", { results: response.data.items });
+      res.render("bookApiResults", {
+        results: response.data.items,
+        user: req.user
+      });
     })
     .catch(err => {
       console.log(err);
