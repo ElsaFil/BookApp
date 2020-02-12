@@ -30,9 +30,11 @@
       <br>
       {{/each}}
     </p>
+    {{#if user}}
     <form action="/bookDetails/{{result.id}}" method="POST">
       <button type="submit" class="add-to-your-books-btn">Add to your books</button>
     </form>
+    {{/if}}
     {{#each owners}}
     <div class="addresses hidden">{{this.address.street}} {{this.address.number}}, {{this.address.PLZ}}</div>
     {{/each}}
