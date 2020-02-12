@@ -119,14 +119,4 @@ router.get("/bookDetails/:bookGoogleId/owners", (req, res, next) => {
     });
 });
 
-router.get("/profile/:userId", (req, res, next) => {
-  let userId = req.params.userId;
-  User.findById(userId)
-    .populate("books")
-    .then(response => {
-      //res.send(response);
-      res.render("userProfile", response);
-    });
-});
-
 module.exports = router;

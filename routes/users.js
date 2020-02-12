@@ -12,10 +12,16 @@ router.get("/allUsers", (req, res, next) => {
           return;
         }
         let bookNames = user.books.reduce((acc, book, index) => {
-          return acc + `<li>` + book.title + `</li>`;
+          return (
+            acc +
+            `<li><a href="/bookDetails/${book.googleId}">` +
+            book.title +
+            `</a></li>`
+          );
         }, "");
         result.push({
-          user: user.username,
+          userId: user._id,
+          userName: user.username,
           address: user.address,
           books: bookNames
         });
@@ -25,6 +31,16 @@ router.get("/allUsers", (req, res, next) => {
     .catch(err => {
       console.log(err);
       next(err);
+    });
+});
+
+router.get("/profile/:userId", (req, res, next) => {
+  let userId = req.params.userId;
+  User.findById(userId)
+    .populate("books")
+    .then(response => {
+      //res.send(response);
+      res.render("userProfile", response);
     });
 });
 

@@ -16,7 +16,8 @@
         var mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken });
         response.data.forEach(userInfo => {
           /* userInfo:
-            user: owner.username,
+            userId:
+            userName: owner.username,
             address: owner.address
             books
           */
@@ -38,8 +39,9 @@
                 var feature = response.body.features[0];
                 var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
                   `<strong>Books: </strong> <br> <ul>${userInfo.books} </ul><br> 
-                  <strong>Owner: ${userInfo.user} </strong> <br> 
-                  ${addressString}`
+                  <strong>Owner: ${userInfo.userName} </strong> <br> 
+                  ${addressString} <br>
+                  <a href="/profile/${userInfo.userId}">View profile</a>`
                 );
 
                 new mapboxgl.Marker()
