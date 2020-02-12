@@ -62,10 +62,11 @@ router.post("/bookDetails/:bookGoogleId", (req, res, next) => {
             categories: response.data.volumeInfo.categories,
             averageRating: response.data.volumeInfo.averageRating,
             language: response.data.volumeInfo.language,
-            coverImageUrl: response.data.volumeInfo.imageLinks.thumbnail,
+            coverImageURL: response.data.volumeInfo.imageLinks.thumbnail,
             infoLinkURL: response.data.volumeInfo.infoLink,
             googleId: req.params.bookGoogleId,
-            owners: req.user._id
+            owners: req.user._id,
+            available: true
           })
             .then(createdBook => {
               return User.updateOne(
@@ -115,6 +116,16 @@ router.get("/bookDetails/:bookGoogleId/owners", (req, res, next) => {
         return next(err);
       }
       response.json = book.owners;
+    });
+});
+
+router.get("/profile/:userId", (req, res, next) => {
+  let userId = req.params.userId;
+  User.findById(userId)
+    .populate("books")
+    .then(response => {
+      //res.send(response);
+      res.render("userProfile", response);
     });
 });
 

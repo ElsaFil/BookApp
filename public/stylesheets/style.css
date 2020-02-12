@@ -150,6 +150,21 @@ nav a {
   border-radius: 4px;
   font-size: 11pt;
   border: 1px solid #595959;
+  background-color: #ff847b;
+  margin-bottom: 10px; }
+
+.borrow-book-btn {
+  height: 30px;
+  border-radius: 4px;
+  font-size: 11pt;
+  border: 1px solid #595959;
   background-color: #ff847b; }
+
+.userInfo {
+  width: 25%;
+  border: 1px solid #595959;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  text-align: center; }
 
 /*# sourceMappingURL=style.css.map */

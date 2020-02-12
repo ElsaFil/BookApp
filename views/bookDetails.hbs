@@ -38,7 +38,7 @@
     {{#each owners}}
     <div class="addresses hidden">
       {{this.address.street}} {{this.address.number}}, {{this.address.PLZ}}
-      |{{this.username}}
+      |{{this.username}}|{{this.id}}
     </div>
     {{/each}}
   </div>
@@ -53,6 +53,7 @@
       document.querySelectorAll(".addresses").forEach(div => {
         let address = div.innerText.split("|")[0];
         let username = div.innerText.split("|")[1];
+        let profile = div.innerText.split("|")[2];
         mapboxClient.geocoding
           .forwardGeocode({
             query: address,
@@ -69,7 +70,8 @@
             ) {
               var feature = response.body.features[0];
               var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
-                `<strong>Owner: ${username} </strong> <br> ${address}`
+                `<strong>Owner: ${username} </strong> <br> ${address} <br>
+                  <a href="/profile/${profile}">View profile</a>`
               );
 
               new mapboxgl.Marker()
