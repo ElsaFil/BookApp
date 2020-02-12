@@ -51,7 +51,6 @@ router.post("/bookDetails/:bookGoogleId", (req, res, next) => {
     .then(response => {
       Book.findOne({ googleId: response.data.id }).then(foundBook => {
         if (!foundBook) {
-          console.log("not in db");
           Book.create({
             title: response.data.volumeInfo.title,
             subtitle: response.data.volumeInfo.subtitle,
@@ -69,7 +68,6 @@ router.post("/bookDetails/:bookGoogleId", (req, res, next) => {
             owners: req.user._id
           })
             .then(createdBook => {
-              console.log(createdBook);
               return User.updateOne(
                 { _id: req.user._id },
                 { $push: { books: createdBook._id } }
@@ -84,9 +82,7 @@ router.post("/bookDetails/:bookGoogleId", (req, res, next) => {
           User.findById(req.user._id)
             .then(foundUser => {
               if (foundUser.books.includes(foundBook._id)) {
-                console.log("already exists");
               } else {
-                console.log("new book for user");
                 return User.updateOne(
                   { _id: req.user._id },
                   { $push: { books: foundBook._id } }
@@ -111,16 +107,13 @@ router.post("/bookDetails/:bookGoogleId", (req, res, next) => {
 });
 
 router.get("/bookDetails/:bookGoogleId/owners", (req, res, next) => {
-  console.log(`trying to get owners 🌸`);
   let bookGoogleId = req.params.bookGoogleId;
   Book.findOne({ googleId: bookGoogleId })
     .populate("owners")
     .then(foundBook => {
       if (!foundBook) {
-        console.log(`could not find book with id: ${bookGoogleId} ❌`);
         return next(err);
       }
-      console.log(`found book 🎉`);
       response.json = book.owners;
     });
 });

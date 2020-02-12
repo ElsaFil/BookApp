@@ -90,6 +90,9 @@ app.use("/", index);
 const booksRoutes = require("./routes/books");
 app.use("/", booksRoutes);
 
+const userRoutes = require("./routes/users");
+app.use("/", userRoutes);
+
 const authRoutes = require("./routes/auth");
 app.use("/auth", authRoutes);
 
