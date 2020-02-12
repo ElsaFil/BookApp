@@ -27,11 +27,16 @@ router.get("/signup", (req, res, next) => {
 router.post("/signup", (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
+  const email = req.body.email;
   const street = req.body.street;
   const number = req.body.number;
   const zip = req.body.zip;
   if (username === "" || password === "") {
     res.render("auth/signup", { message: "Enter username and password" });
+    return;
+  }
+  if (email === "") {
+    res.render("auth/signup", { message: "Enter an email" });
     return;
   }
   if (street === "" || number === "" || zip == "") {
@@ -49,6 +54,7 @@ router.post("/signup", (req, res, next) => {
     const newUser = new User({
       username: username,
       password: hashPass,
+      email: email,
       address: {
         street,
         number,
