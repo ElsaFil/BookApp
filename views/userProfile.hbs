@@ -1,24 +1,38 @@
 <div class="container">
   <div class="userInfo">
-    <h1>{{username}}</h2>
-      <p>{{address.street}} {{address.number}}, {{address.PLZ}}</p>
+    <h1>{{result.username}}</h2>
+      <p>{{result.address.street}} {{result.address.number}}, {{result.address.PLZ}}</p>
+  </div>
+  <div class="profileBookSearch">
+    <form action="/booksApiCall" method="get">
+      <label for="booksearch">
+        <h2>Add books to your collection</h2>
+      </label>
+      <input type="text" name="bookSearch" id="bookSearch" placeholder="Enter book title">
+      <button type="submit">Search</button>
+    </form>
   </div>
   <h2>Book Collection:</h2>
-  <div class="booksContainer">
-    {{#each books}}
-    <a href="/bookDetails/{{this.googleId}}">
-      <div class="bookCard">
-        <h2>{{this.title}}</h1>
-          {{#if this.coverImageURL}}
-          <img src="{{this.coverImageURL}}" alt="book cover">
-          {{else}}
-          <img class="book-cover-placeholder" src="/images/placeholder-image.png" alt="missing book cover">
-          {{/if}}
-          {{#each this.authors}}
-          <h3>{{this}}</h3>
-          {{/each}}
-      </div>
-    </a>
+  <div class="profileBooksContainer">
+    {{#each result.books}}
+    <div class="profileBooks">
+      <a class="big-link" href="/bookDetails/{{this.googleId}}">
+        <div class="bookCard">
+          <h2>{{this.title}}</h1>
+            {{#if this.coverImageURL}}
+            <img src="{{this.coverImageURL}}" alt="book cover">
+            {{else}}
+            <img class="book-cover-placeholder" src="/images/placeholder-image.png" alt="missing book cover">
+            {{/if}}
+            {{#each this.authors}}
+            <h3>{{this}}</h3>
+            {{/each}}
+        </div>
+      </a>
+      {{#if ../showDelete}}
+      <a id="delete-link" href="/bookDetails/{{this._id}}/delete"><button id="delete" type="submit">Delete</button></a>
+      {{/if}}
+    </div>
     {{/each}}
   </div>
 </div>

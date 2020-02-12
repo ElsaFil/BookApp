@@ -92,7 +92,7 @@ nav a {
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
-.booksContainer a {
+.booksContainer .big-link {
   width: 30%;
   border: 1px solid #595959;
   border-radius: 20px;
@@ -167,8 +167,53 @@ nav a {
 }
 .userInfo {
   width: 25%;
-  border: 1px solid #595959;
+  border: 1px solid #ff847b;
   border-radius: 20px;
   margin-bottom: 20px;
   text-align: center;
+}
+.profileBookSearch {
+  padding: 20px 0px;
+}
+.profileBookSearch input {
+  width: 30vw;
+  font-size: 1.2em;
+  padding: 10px;
+  border: 0.5px solid #595959;
+  border-radius: 10px;
+}
+.profileBookSearch button {
+  font-size: 1.2em;
+  padding: 10px;
+  background-color: white;
+  color: #ff847b;
+  border: 1px solid #ff847b;
+  border-radius: 10px;
+}
+#delete {
+  text-decoration: none;
+  font-size: 1.2em;
+  padding: 10px;
+  background-color: white;
+  color: #ff847b;
+  border: 1px solid #ff847b;
+  border-radius: 10px;
+}
+.profileBooksContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.profileBooksContainer a {
+  text-decoration: none;
+}
+.profileBooks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+  border: 1px solid #595959;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
 }

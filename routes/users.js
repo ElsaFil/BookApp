@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
+const Book = require("../models/Book");
 
 router.get("/allUsers", (req, res, next) => {
   User.find()
@@ -35,12 +36,28 @@ router.get("/allUsers", (req, res, next) => {
 });
 
 router.get("/profile/:userId", (req, res, next) => {
-  let userId = req.params.userId;
+  const userId = req.params.userId;
   User.findById(userId)
     .populate("books")
     .then(response => {
       //res.send(response);
-      res.render("userProfile", response);
+      let showDelete = false;
+      if (userId.toString() === req.user._id.toString()) {
+        showDelete = true;
+      }
+      res.render("userProfile", { result: response, showDelete: showDelete });
+    });
+});
+
+router.get("/bookDetails/:id/delete", (req, res, next) => {
+  const query = { _id: req.params.id };
+  Book.deleteOne(query)
+    .then(() => {
+      res.redirect(`/profile/${req.user._id}`);
+    })
+    .catch(err => {
+      console.log(err);
+      next(err);
     });
 });
 
