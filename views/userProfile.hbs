@@ -51,6 +51,9 @@
   const unavailableIds = `{{unavailableIds}}`;
   const isSelfUser = `{{showDelete}}`;
 
+  if (isSelfUser == 'false') {
+    document.getElementsByClassName("profileBookSearch")[0].classList.add("hidden");
+  }
   unavailableIds.split(",").forEach(unavailableId => {
     let bookDiv = document.getElementById(unavailableId);
     if (bookDiv && isSelfUser == 'false') {

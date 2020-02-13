@@ -170,7 +170,7 @@ nav a {
   width: 25%;
   border: 1px solid #ff847b;
   border-radius: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   text-align: center; }
 
 .profileBookSearch {
@@ -201,6 +201,7 @@ nav a {
   border-radius: 10px; }
 
 .profileBooksContainer {
+  margin-top: 40px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly; }
@@ -236,5 +237,19 @@ nav a {
   font-style: italic;
   font-weight: bold;
   font-size: 1.3em; }
+
+.contact {
+  text-align: center;
+  padding-top: 100px; }
+
+.contact label {
+  font-size: 1.5em;
+  font-weight: bold; }
+
+.contact textarea {
+  margin: 20px;
+  border: 1px solid #595959;
+  border-radius: 10px;
+  padding: 10px; }
 
 /*# sourceMappingURL=style.css.map */
