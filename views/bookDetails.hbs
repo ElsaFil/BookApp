@@ -38,7 +38,7 @@
     {{#each owners}}
     <div class="addresses hidden">
       {{this.address.street}} {{this.address.number}}, {{this.address.PLZ}}
-      |{{this.username}}|{{this.id}}|
+      |{{this.username}}|{{this.id}}{{#if ../user}}|loggedin|{{../user._id}}{{/if}}|
     </div>
     {{/each}}
   </div>
@@ -52,9 +52,8 @@
       var mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken });
       document.querySelectorAll(".addresses").forEach(div => {
         let address = div.innerText.split("|")[0];
-        let username = div.innerText.split("|")[1];
-        let profile = div.innerText.split("|")[2];
-        let bookId = location.href.split("/")[4];
+        let ownerName = div.innerText.split("|")[1];
+        let ownerId = div.innerText.split("|")[2];
         mapboxClient.geocoding
           .forwardGeocode({
             query: address,
@@ -69,13 +68,22 @@
               response.body.features &&
               response.body.features.length
             ) {
-              var feature = response.body.features[0];
-              var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
-                `<strong>Owner: ${username} </strong> <br> ${address} <br>
-                  <a href="/profile/${profile}">View profile</a>
-                  <a href="/contact/${profile}/${bookId}">Contact</a>`
-              );
+              let popupHTML = `<strong>Owner: ${ownerName} </strong> <br>
+              <a href="/profile/${ownerId}">View profile</a>`;
+              let loggedin = div.innerText.split("|")[3];
+              let loggedinUserId = div.innerText.split("|")[4];
+              if (loggedin == "loggedin" &&
+                loggedinUserId.toString() != ownerId.toString()) {
+                let bookId = location.href.split("/")[4];
+                popupHTML =
+                  `<strong>Owner: ${ownerName} </strong> <br>
+                  ${address} <br>
+                  <a href="/profile/${ownerId}">View profile</a>
+                  <a href="/contact/${ownerId}/${bookId}">Contact</a>`;
+              }
 
+              var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(popupHTML);
+              var feature = response.body.features[0];
               new mapboxgl.Marker()
                 .setLngLat(feature.center)
                 .setPopup(popup)

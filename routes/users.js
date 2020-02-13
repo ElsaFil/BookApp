@@ -25,7 +25,8 @@ router.get("/allUsers", (req, res, next) => {
           userId: user._id,
           userName: user.username,
           address: user.address,
-          books: bookNames
+          books: bookNames,
+          loggedIn: req.user
         });
       });
       res.json(result);
@@ -41,9 +42,8 @@ router.get("/profile/:userId", (req, res, next) => {
   User.findById(userId)
     .populate("books")
     .then(response => {
-      //res.send(response);
       let showDelete = false;
-      if (userId.toString() === req.user._id.toString()) {
+      if (req.user && userId.toString() === req.user._id.toString()) {
         showDelete = true;
       }
       res.render("userProfile", { result: response, showDelete: showDelete });

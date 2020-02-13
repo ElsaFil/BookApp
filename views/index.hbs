@@ -2,7 +2,7 @@
   <img id="logo" src="/images/logo.png" alt="logo">
   <form action="/booksApiCall" method="get">
     <input type="text" name="bookSearch" id="bookSearch" placeholder="Enter book title">
-    <button>
+    <button class="form-button">
       Search
     </button>
   </form>
@@ -20,6 +20,7 @@
             userName: owner.username,
             address: owner.address
             books
+            loggedIn
           */
           let addressString = `${userInfo.address.street} ${userInfo.address.number}, ${userInfo.address.PLZ}`;
           mapboxClient.geocoding
@@ -37,12 +38,13 @@
                 response.body.features.length
               ) {
                 var feature = response.body.features[0];
-                var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
-                  `<strong>Books: </strong> <br> <ul>${userInfo.books} </ul><br> 
-                  <strong>Owner: ${userInfo.userName} </strong> <br> 
-                  ${addressString} <br>
-                  <a href="/profile/${userInfo.userId}">View profile</a>`
-                );
+                let popupHTML = `<strong>Books: </strong> <br> <ul>${userInfo.books} </ul><br> 
+                  <strong>Owner: ${userInfo.userName} </strong> <br>`;
+                if (userInfo.loggedIn) {
+                  popupHTML += `${addressString} <br>`;
+                }
+                popupHTML += `<a href="/profile/${userInfo.userId}">View profile</a>`;
+                var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(popupHTML);
 
                 new mapboxgl.Marker()
                   .setLngLat(feature.center)

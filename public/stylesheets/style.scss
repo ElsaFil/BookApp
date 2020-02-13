@@ -12,6 +12,12 @@ body {
   margin: 50px auto;
   width: 100%;
 }
+.mapboxgl-popup-content {
+  padding: 20px !important;
+}
+.mapboxgl-popup-close-button {
+  font-size: 14pt !important;
+}
 
 nav {
   position: fixed;
@@ -55,7 +61,7 @@ nav a {
   border: 0.5px solid #595959;
   border-radius: 10px;
 }
-.formContainer button {
+.formContainer .form-button {
   font-size: 1.2em;
   padding: 10px;
   background-color: white;
