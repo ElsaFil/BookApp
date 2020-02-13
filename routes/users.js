@@ -52,7 +52,18 @@ router.get("/profile/:userId", (req, res, next) => {
 
 router.get("/bookDetails/:id/delete", (req, res, next) => {
   const query = { _id: req.params.id };
-  Book.deleteOne(query)
+  Book.findOne(query)
+    .then(foundBook => {
+      return Book.updateOne(
+        { _id: foundBook._id },
+        { $pull: { owners: req.user._id } }
+      ).then(() => {
+        return User.updateOne(
+          { _id: req.user._id },
+          { $pull: { books: foundBook._id } }
+        );
+      });
+    })
     .then(() => {
       res.redirect(`/profile/${req.user._id}`);
     })
@@ -100,14 +111,14 @@ router.post("/contact/:userId/:bookId", (req, res, next) => {
             to: ownerEmail,
             subject: `New private message`,
             text: `Someone wants to borrow one of your books.`,
-            html: `<b>Good news!</b> <br> The user <strong>${ownerName}</strong> 
+            html: `<b>Good news!</b> <br> The user <strong>${req.user.username}</strong> 
           wants to borrow your book with the title <i>${foundBook.title}</i>.
           <br>
           Message from user:
           <p><i>${comment}</i></p>
           <br>
           Click on the following link to allow: 
-          <a href="${process.env.BASEURL}">Allow Request</a>`
+          <a href="${process.env.BASEURL}profile/${req.params.userId}">Allow Request</a>`
           })
           .then(info => {
             res.redirect(`/bookDetails/${req.params.bookId}`);
