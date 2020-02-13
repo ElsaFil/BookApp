@@ -4,19 +4,12 @@ const axios = require("axios");
 const Book = require("../models/Book");
 const googleKey = process.env.API_KEY;
 const User = require("../models/User");
-let startIndex = 0;
 
 router.get("/booksApiCall", (req, res, next) => {
-  axios
-    .get(
-      `https://www.googleapis.com/books/v1/volumes?q=${req.query.bookSearch}|inauthor:${req.query.bookSearch}&maxResults=39&startIndex=${startIndex}&printType=books&key=${googleKey}`
-    )
-    .then(response => {
-      res.render("bookApiResults", { results: response.data.items });
-    })
-    .catch(err => {
-      console.log(err);
-    });
+  res.render("bookApiResults", {
+    query: req.query.bookSearch,
+    googleKey: googleKey
+  });
 });
 
 router.get("/bookDetails/:bookGoogleId", (req, res, next) => {

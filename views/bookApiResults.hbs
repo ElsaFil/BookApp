@@ -18,3 +18,67 @@
   </a>
   {{/each}}
 </div>
+<div class="formContainer">
+  <form id="more-books-form" action="/booksApiCall" method="get">
+    <button class="form-button">Next ></button>
+  </form>
+</div>
+
+<script>
+
+  let startIndex = 0;
+  const query = `{{query}}`;
+  const googleKey = `{{googleKey}}`;
+
+  document
+    .getElementById("more-books-form")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
+      apiRequest();
+    });
+
+  window.onload = function () {
+    startIndex = 0;
+    apiRequest();
+  };
+
+  function apiRequest() {
+    axios
+      .get(`https://www.googleapis.com/books/v1/volumes?q=${query}|inauthor:${query}&maxResults=39&startIndex=${startIndex}&printType=books&key=${googleKey}`)
+      .then(response => {
+        const container = document.getElementsByClassName(
+          "booksContainer"
+        )[0];
+        container.innerHTML = "";
+        response.data.items.forEach(book => {
+          let bookLink = document.createElement("a");
+          bookLink.classList = "big-link";
+          bookLink.href = `/bookDetails/${book.id}`;
+          let bookDiv = document.createElement("div");
+          bookDiv.classList = "bookCard";
+          let innerHTML = `
+                <h2>${book.volumeInfo.title}</h1>`;
+          if (book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail) {
+            innerHTML += `<img src="${book.volumeInfo.imageLinks.thumbnail}" alt="book cover">`;
+          }
+          else {
+            innerHTML += `<img class="book-cover-placeholder" src="/images/placeholder-image.png" alt="missing book cover">`;
+          }
+          if (book.volumeInfo.authors) {
+            book.volumeInfo.authors.forEach(author => {
+              innerHTML += `<h3>${author}</h3>`;
+            });
+          }
+          bookDiv.innerHTML = innerHTML;
+          bookLink.append(bookDiv);
+          container.appendChild(bookLink);
+        });
+
+        startIndex += 40;
+        console.log(startIndex);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+</script>
