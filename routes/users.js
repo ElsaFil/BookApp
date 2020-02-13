@@ -118,7 +118,7 @@ router.post("/contact/:userId/:bookId", (req, res, next) => {
           <p><i>${comment}</i></p>
           <br>
           Click on the following link to allow: 
-          <a href="${process.env.BASEURL}">Allow Request</a>`
+          <a href="${process.env.BASEURL}/profile/${req.params.userId}">Allow Request</a>`
           })
           .then(info => {
             res.redirect(`/bookDetails/${req.params.bookId}`);

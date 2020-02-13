@@ -33,7 +33,8 @@
       <a id="delete-link" href="/bookDetails/{{this._id}}/delete"><button class="delete-borrow"
           type="submit">Delete</button></a>
       {{else}}
-      <a id="borrow-link" href=""><button class="delete-borrow" type="submit">Borrow</button></a>
+      <a id="borrow-link" href="/contact/{{../result._id}}/{{this.googleId}}"><button class="delete-borrow"
+          type="submit">Borrow</button></a>
       {{/if}}
     </div>
     {{/each}}
