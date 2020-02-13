@@ -111,14 +111,14 @@ router.post("/contact/:userId/:bookId", (req, res, next) => {
             to: ownerEmail,
             subject: `New private message`,
             text: `Someone wants to borrow one of your books.`,
-            html: `<b>Good news!</b> <br> The user <strong>${ownerName}</strong> 
+            html: `<b>Good news!</b> <br> The user <strong>${req.user.username}</strong> 
           wants to borrow your book with the title <i>${foundBook.title}</i>.
           <br>
           Message from user:
           <p><i>${comment}</i></p>
           <br>
           Click on the following link to allow: 
-          <a href="${process.env.BASEURL}/profile/${req.params.userId}">Allow Request</a>`
+          <a href="${process.env.BASEURL}profile/${req.params.userId}">Allow Request</a>`
           })
           .then(info => {
             res.redirect(`/bookDetails/${req.params.bookId}`);
