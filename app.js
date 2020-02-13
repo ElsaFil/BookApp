@@ -93,6 +93,9 @@ app.use("/", booksRoutes);
 const userRoutes = require("./routes/users");
 app.use("/", userRoutes);
 
+const contactRoutes = require("./routes/contact");
+app.use("/", contactRoutes);
+
 const authRoutes = require("./routes/auth");
 app.use("/auth", authRoutes);
 

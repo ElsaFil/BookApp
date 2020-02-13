@@ -15,7 +15,7 @@
   <h2>Book Collection:</h2>
   <div class="profileBooksContainer">
     {{#each result.books}}
-    <div class="profileBooks">
+    <div class="profileBooks" id="{{this.googleId}}">
       <a class="big-link" href="/bookDetails/{{this.googleId}}">
         <div class="bookCard">
           <h2>{{this.title}}</h1>
@@ -30,6 +30,12 @@
         </div>
       </a>
       {{#if ../showDelete}}
+      <div class="hidden-message hidden">
+        <h3>This book is lended to someone.</h3>
+        <a id="return-link" href="/profile/{{../result._id}}/{{this._id}}/return"><button class="delete-borrow"
+            type="submit">Mark as
+            available</button></a>
+      </div>
       <a id="delete-link" href="/bookDetails/{{this._id}}/delete"><button class="delete-borrow"
           type="submit">Delete</button></a>
       {{else}}
@@ -40,3 +46,18 @@
     {{/each}}
   </div>
 </div>
+
+<script>
+  const unavailableIds = `{{unavailableIds}}`;
+  const isSelfUser = `{{showDelete}}`;
+
+  unavailableIds.split(",").forEach(unavailableId => {
+    let bookDiv = document.getElementById(unavailableId);
+    if (bookDiv && isSelfUser == 'false') {
+      bookDiv.classList.add("unavailable-book");
+    }
+    else {
+      bookDiv.getElementsByClassName("hidden-message")[0].classList.remove("hidden");
+    }
+  });
+</script>

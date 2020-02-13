@@ -40,13 +40,18 @@ router.get("/allUsers", (req, res, next) => {
 router.get("/profile/:userId", (req, res, next) => {
   const userId = req.params.userId;
   User.findById(userId)
-    .populate("books")
+    .populate("books unavailableBooks")
     .then(response => {
       let showDelete = false;
       if (req.user && userId.toString() === req.user._id.toString()) {
         showDelete = true;
       }
-      res.render("userProfile", { result: response, showDelete: showDelete });
+      let unavailableIds = response.unavailableBooks.map(book => book.googleId);
+      res.render("userProfile", {
+        result: response,
+        unavailableIds: unavailableIds,
+        showDelete: showDelete
+      });
     });
 });
 
@@ -73,62 +78,39 @@ router.get("/bookDetails/:id/delete", (req, res, next) => {
     });
 });
 
-router.get("/contact/:userId/:bookId", (req, res, next) => {
-  res.render("contact", {
-    userId: req.params.userId,
-    bookId: req.params.bookId
-  });
+router.get("/profile/:userId/:bookId/allow", (req, res, next) => {
+  User.findById(req.params.userId)
+    .populate("books")
+    .then(foundUser => {
+      return User.updateOne(
+        { _id: foundUser._id },
+        { $push: { unavailableBooks: req.params.bookId } }
+      );
+    })
+    .then(() => {
+      res.redirect(`/profile/${req.params.userId}`);
+    })
+    .catch(err => {
+      console.log(err);
+      next(err);
+    });
 });
 
-router.post("/contact/:userId/:bookId", (req, res, next) => {
-  let transporter = nodemailer.createTransport({
-    service: "Gmail",
-    auth: {
-      user: process.env.GMAIL,
-      pass: process.env.GMAIL_PASSWORD
-    }
-  });
-
-  Book.findOne({ googleId: req.params.bookId })
-    .populate("owners")
-    .then(foundBook => {
-      if (foundBook) {
-        let owner = foundBook.owners.filter(
-          owner => owner._id.toString() === req.params.userId.toString()
-        )[0];
-        console.log("userEmail: " + owner.email);
-        if (!owner) {
-          res.redirect(`/bookDetails/${req.params.bookId}`);
-          return;
-        }
-        let ownerName = owner.username;
-        let ownerEmail = owner.email;
-        let comment = req.body.message;
-
-        transporter
-          .sendMail({
-            from: `"Books Borrow App" "booksborrowapp@gmail.com"`,
-            to: ownerEmail,
-            subject: `New private message`,
-            text: `Someone wants to borrow one of your books.`,
-            html: `<b>Good news!</b> <br> The user <strong>${req.user.username}</strong> 
-          wants to borrow your book with the title <i>${foundBook.title}</i>.
-          <br>
-          Message from user:
-          <p><i>${comment}</i></p>
-          <br>
-          Click on the following link to allow: 
-          <a href="${process.env.BASEURL}profile/${req.params.userId}">Allow Request</a>`
-          })
-          .then(info => {
-            res.redirect(`/bookDetails/${req.params.bookId}`);
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      } else {
-        res.redirect(`/bookDetails/${req.params.bookId}`);
-      }
+router.get("/profile/:userId/:bookId/return", (req, res, next) => {
+  User.findById(req.params.userId)
+    .populate("books")
+    .then(foundUser => {
+      return User.updateOne(
+        { _id: foundUser._id },
+        { $pull: { unavailableBooks: req.params.bookId } }
+      );
+    })
+    .then(() => {
+      res.redirect(`/profile/${req.params.userId}`);
+    })
+    .catch(err => {
+      console.log(err);
+      next(err);
     });
 });
 

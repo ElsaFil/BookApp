@@ -218,4 +218,23 @@ nav a {
   margin-bottom: 20px;
   padding: 10px; }
 
+.unavailable-book,
+.unavailable-book button {
+  background-color: lightgray; }
+
+.unavailable-book a {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.6; }
+
+.hidden-message {
+  text-align: center;
+  padding: 12px;
+  margin-bottom: 5px; }
+
+.hidden-message h3 {
+  font-style: italic;
+  font-weight: bold;
+  font-size: 1.3em; }
+
 /*# sourceMappingURL=style.css.map */

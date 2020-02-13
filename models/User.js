@@ -24,6 +24,12 @@ const userSchema = new Schema({
       ref: "Book"
     }
   ],
+  unavailableBooks: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Book"
+    }
+  ],
   reviews: [
     {
       type: Schema.Types.ObjectId,
