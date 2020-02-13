@@ -30,7 +30,10 @@
         </div>
       </a>
       {{#if ../showDelete}}
-      <a id="delete-link" href="/bookDetails/{{this._id}}/delete"><button id="delete" type="submit">Delete</button></a>
+      <a id="delete-link" href="/bookDetails/{{this._id}}/delete"><button class="delete-borrow"
+          type="submit">Delete</button></a>
+      {{else}}
+      <a id="borrow-link" href=""><button class="delete-borrow" type="submit">Borrow</button></a>
       {{/if}}
     </div>
     {{/each}}

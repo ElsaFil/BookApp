@@ -51,7 +51,18 @@ router.get("/profile/:userId", (req, res, next) => {
 
 router.get("/bookDetails/:id/delete", (req, res, next) => {
   const query = { _id: req.params.id };
-  Book.deleteOne(query)
+  Book.findOne(query)
+    .then(foundBook => {
+      return Book.updateOne(
+        { _id: foundBook._id },
+        { $pull: { owners: req.user._id } }
+      ).then(() => {
+        return User.updateOne(
+          { _id: req.user._id },
+          { $pull: { books: foundBook._id } }
+        );
+      });
+    })
     .then(() => {
       res.redirect(`/profile/${req.user._id}`);
     })
