@@ -14,15 +14,15 @@ const MongoStore = require("connect-mongo")(session);
 const flash = require("connect-flash");
 
 mongoose
-  .connect(process.env.MONGODB_URI || "mongodb://localhost/bookapp", {
-    useNewUrlParser: true
+  .connect(process.env.DB_URI || "mongodb://localhost/bookapp", {
+    useNewUrlParser: true,
   })
-  .then(x => {
+  .then((x) => {
     console.log(
       `Connected to Mongo! Database name: "${x.connections[0].name}"`
     );
   })
-  .catch(err => {
+  .catch((err) => {
     console.error("Error connecting to mongo", err);
   });
 
@@ -45,7 +45,7 @@ app.use(
   require("node-sass-middleware")({
     src: path.join(__dirname, "public"),
     dest: path.join(__dirname, "public"),
-    sourceMap: true
+    sourceMap: true,
   })
 );
 
@@ -71,7 +71,7 @@ app.use(
     secret: "irongenerator",
     resave: true,
     saveUninitialized: true,
-    store: new MongoStore({ mongooseConnection: mongoose.connection })
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
 );
 app.use(flash());
